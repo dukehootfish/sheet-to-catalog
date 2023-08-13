@@ -1,5 +1,5 @@
 const spreadsheetId = '15DkWp1UTI7varIFLKMVa13JGlpz6gIE1Zd9EZRU7_BQ';
-const apiKey = 'YOUR_GOOGLE_SHEETS_API_KEY';
+const apiKey = 'AIzaSyBR2WBVvpeL3uB_dlua8UGFWAPYYyruPVg;
 const range = 'sheety 11'; // Change this to your sheet's name
 
 function fetchData() {
