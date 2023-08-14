@@ -1,7 +1,7 @@
 const catalogContainer = document.getElementById("catalog");
 
 // Replace with your Google Sheets URL
-const googleSheetsURL = "YOUR_GOOGLE_SHEETS_PUBLISHED_URL";
+const googleSheetsURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQiD4YbQLlsyn8IYJwA4QgKaVW8U7yToBg57duch6Akz_iuOMsZmYz-rTjuc54snxSMPfSTJEbxinyQ/pubhtml";
 
 // Fetch data from Google Sheets
 fetch(googleSheetsURL)
