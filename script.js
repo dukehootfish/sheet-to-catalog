@@ -1,46 +1,32 @@
-const itemsContainer = document.getElementById('items-container');
+const catalogContainer = document.getElementById("catalog");
 
 // Replace with your Google Sheets URL
-const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQiD4YbQLlsyn8IYJwA4QgKaVW8U7yToBg57duch6Akz_iuOMsZmYz-rTjuc54snxSMPfSTJEbxinyQ/pubhtml';
+const googleSheetsURL = "YOUR_GOOGLE_SHEETS_PUBLISHED_URL";
 
-fetch(sheetUrl)
+// Fetch data from Google Sheets
+fetch(googleSheetsURL)
     .then(response => response.text())
     .then(data => {
-        const rows = data.split('\n');
-        const headers = rows[0].split(',');
-
-        for (let i = 1; i < rows.length; i++) {
-            const values = rows[i].split(',');
+        const lines = data.split("\n");
+        const attributes = lines[0].split(",");
+        
+        for (let i = 1; i < lines.length; i++) {
+            const values = lines[i].split(",");
             const item = {};
-
-            for (let j = 0; j < headers.length; j++) {
-                item[headers[j]] = values[j];
+            for (let j = 0; j < attributes.length; j++) {
+                item[attributes[j]] = values[j];
             }
-
-            const itemElement = createItemElement(item);
-            itemsContainer.appendChild(itemElement);
+            
+            // Create HTML elements to display catalog items
+            const itemDiv = document.createElement("div");
+            itemDiv.innerHTML = `
+                <h2>${item.name}</h2>
+                <p>${item.description}</p>
+                <p>Price: ${item.price}</p>
+                <img src="${item.imageURL}" alt="${item.name}">
+            `;
+            
+            catalogContainer.appendChild(itemDiv);
         }
-    });
-
-function createItemElement(item) {
-    const itemDiv = document.createElement('div');
-    itemDiv.className = 'item';
-
-    const image = document.createElement('img');
-    image.src = item['Image'];
-    itemDiv.appendChild(image);
-
-    const itemName = document.createElement('h2');
-    itemName.textContent = item['Item Name'];
-    itemDiv.appendChild(itemName);
-
-    const description = document.createElement('p');
-    description.textContent = item['Description'];
-    itemDiv.appendChild(description);
-
-    const price = document.createElement('p');
-    price.textContent = 'Price: $' + item['Price'];
-    itemDiv.appendChild(price);
-
-    return itemDiv;
-}
+    })
+    .catch(error => console.error("Error fetching data:", error));
